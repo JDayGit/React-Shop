@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "firebase": "^7.2.2",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -34,5 +35,13 @@
   "main": "index.js",
   "devDependencies": {},
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JakeDayGit/react-shop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JakeDayGit/react-shop/issues"
+  },
+  "homepage": "https://github.com/JakeDayGit/react-shop#readme"
 }
