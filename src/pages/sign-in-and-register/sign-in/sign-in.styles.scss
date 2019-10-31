@@ -1,19 +1,15 @@
 .sign-in {
-     width: 32vw; 
+     width: 22vw; 
      display: flex;
      flex-direction: column;
 
      .title {
           margin: 10px 0;
+          font-size: 22px;
      }
 
-     #google {
-          background: #4285F4;
-          border: none;
-          cursort: pointer;
-          margin: 0 15px;
-     }
-     #google:hover{
-          border: none;
+     .buttons {
+          display: flex;
+          justify-content: space-between;
      }
 }

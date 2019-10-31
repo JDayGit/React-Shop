@@ -1,22 +1,20 @@
 import React from 'react';
 
-import './sign-in.styles.scss';
+import './register.styles.scss';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../../../components/custom-button/custom-button.component';
 
-import { signInWithGoogle } from '../../../firebase/firebase.utils';
-
-class SignIn extends React.Component {
+class Register extends React.Component {
      constructor(props){
           super(props);
 
           this.state = {
+               username: '',
                email: '',
                password: ''
           }
      }
-
      // end of constructor
 
      handleSubmit = event => {
@@ -31,15 +29,22 @@ class SignIn extends React.Component {
 
      render(){
           return (
-               <div className='sign-in'>
-                    <h2>I already have an account</h2>
-                    <span>Sign-in with your email and password</span>
-                    
+               <div className='register'>
+                    <h2>I would like to create an account</h2>
+                    <span>Create an account with the form below</span>
                     <form onSubmit={this.handleSubmit}>
                          <FormInput 
-                              name='email' 
-                              type='email' 
-                              value={this.state.email}
+                              name='username' 
+                              type='username' 
+                              value={this.state.username}
+                              label='Username'
+                              handleChange={this.handleChange}
+                              required={true} 
+                         />
+                         <FormInput 
+                              name='email'
+                              type='email'
+                              value={this.state.email} 
                               label='Email'
                               handleChange={this.handleChange}
                               required={true} 
@@ -53,10 +58,8 @@ class SignIn extends React.Component {
                               required={true} 
                          />
                          <div className='buttons'>
-                         <CustomButton type='submit'>SIGN IN</CustomButton>
-                         <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
-                              SIGN IN WITH GOOGLE
-                         </CustomButton>
+                         <CustomButton type='submit'>SIGN UP</CustomButton>
+                         <CustomButton type='submit' isGoogleSignIn>SIGN UP WITH GOOGLE</CustomButton>
                          </div>
                     </form>
                </div>
@@ -64,4 +67,4 @@ class SignIn extends React.Component {
      }
 }
 
-export default SignIn;
+export default Register; 
