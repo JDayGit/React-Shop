@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 import { auth } from '../../firebase/firebase.utils';
 
-import { ReactComponent as Logo } from '../../assets/crown.svg';
+// import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 import './header.styles.scss';
 
 const Header = ({ currentUser }) => (
      <div className='header'>
           <Link className='logo-container' to="/">
-               <Logo className='logo' />
+               <img className='cactus' src='https://image.flaticon.com/icons/svg/43/43369.svg' alt='logo'/>
           </Link>
           <div className='options'>
                <Link className='option' to='/shop'>SHOP</Link>
@@ -27,6 +27,5 @@ const Header = ({ currentUser }) => (
           }
           </div>
      </div>
-);
-
+); 
 export default Header;

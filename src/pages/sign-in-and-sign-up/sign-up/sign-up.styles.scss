@@ -1,0 +1,17 @@
+.sign-up {
+     display: flex;
+     flex-direction: column;
+     width: 400px;
+     box-sizing: border-box;
+   
+     .title {
+       margin: 10px 0;
+       font-size: 28px !important;
+     }
+
+     .subtitle {
+       font-size: 18px;
+     }
+
+   }
+   

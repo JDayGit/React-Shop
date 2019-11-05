@@ -6,8 +6,8 @@ import './App.css';
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop-page.component';
-import SignInAndRegisterPage from './pages/sign-in-and-register/sign-in-and-register.component';
-import { auth } from './firebase/firebase.utils';
+import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 class App extends React.Component {
   constructor(props){
@@ -18,21 +18,33 @@ class App extends React.Component {
     }
   }
 
-  // called on componentWillUnmount. 
-  unsubscribeFromAuth = null
+  unsubscribeFromAuth = null;
 
-  componentDidMount(){
-    // listening to application state changes. subscription open when app is mounted. 
-    // we also need to close the subscription when the app unmounts. 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user })
+  componentDidMount(){ 
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      // if userAuth object is not null
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        // checking if the user data has changed 
 
-      console.log('CURRENT USER:', user);
+        userRef.onSnapshot(snapShot => {
+        // setting state of currentUser to our user's data. 
+          this.setState({
+            currentUser: {
+              id: snapShot.id, 
+              ...snapShot.data()
+            }
+          });
+          console.log(this.state);
+        });
+      }
+      // if user has signed-out, we setState of currentUser back to null.
+      this.setState({ currentUser: userAuth });
     });
+    console.log(this.state);
   }
   
   componentWillUnmount() {
-    // this will ultimately close the authentication subscription. 
     this.unsubscribeFromAuth();
   }
 
@@ -43,7 +55,7 @@ class App extends React.Component {
         <Switch>
           <Route exact={true} path='/' component={HomePage} />
           <Route exact={true} path='/shop' component={ShopPage} />
-          <Route exact={true} path='/signin' component={SignInAndRegisterPage} />
+          <Route exact={true} path='/signin' component={SignInAndSignUp} />
         </Switch>
       </div>
     );
